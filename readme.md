@@ -1,0 +1,1 @@
+In de terminal naar de folder en dan dotnet run.
