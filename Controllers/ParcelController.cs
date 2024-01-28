@@ -17,13 +17,12 @@ public class ParcelController : ControllerBase
     }
 
     [HttpGet("{trackingNumber}")]
-    public async Task<ActionResult<string>> GetParcel(string trackingNumber)
+    public async Task<ActionResult<Parcel>> GetParcel(string trackingNumber)
     {
         var parcel = await _context.Parcels.FindAsync(trackingNumber);
-        
         if (parcel == null) return NotFound("Het pakket is niet gevonden");
 
-        return parcel.Status;
+        return parcel;
     }
 
     [HttpPost]
@@ -44,7 +43,7 @@ public class ParcelController : ControllerBase
                 Length = parcelReq.length,
                 Width = parcelReq.width
             },
-            Status = "Aangemeld"
+            Status = "Delivered"
             
         };
         parcel.TrackingNumber = Guid.NewGuid().ToString();
